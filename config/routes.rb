@@ -1,4 +1,4 @@
 Rails.application.routes.draw do
   devise_for :users
-  root to: "invoices#new"
+  root to: 'invoices#new'
 end
