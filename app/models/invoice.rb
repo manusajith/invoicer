@@ -22,6 +22,8 @@ class Invoice < ApplicationRecord
   has_many :invoice_items
   validates :due_date, presence: true
 
+  accepts_nested_attributes_for :invoice_items, allow_destroy: true
+
   def sub_total
     invoice_items.collect(&:amount)
   end

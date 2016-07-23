@@ -20,6 +20,5 @@ require 'rails_helper'
 
 RSpec.describe Invoice, type: :model do
   let(:invoice) { create :invoice }
-  it { invoice }
   it { should validate_presence_of(:due_date) }
 end

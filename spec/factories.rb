@@ -4,6 +4,7 @@ FactoryGirl.define do
     name 'John'
     email 'test@test.com'
     password '12345678'
+    company
   end
 
   factory :receiver, class: User do
@@ -12,13 +13,17 @@ FactoryGirl.define do
     password '12345678'
   end
 
-  factory :company do
+  factory :invoice_to, class: Company do
+    name 'test company'
+  end
+
+  factory :invoice_by, class: Company, aliases: [:company] do
     name 'test company'
   end
 
   factory :invoice do
-    invoice_to    receiver
-    invoice_by    user
+    invoice_to
+    invoice_by
     invoice_date  Date.today - 1
     due_date      Date.today + 2
     invoice_no    'r3w434'
@@ -29,5 +34,8 @@ FactoryGirl.define do
   end
 
   factory :invoice_item do
+    invoice
+    unit 2
+    price 20
   end
 end
