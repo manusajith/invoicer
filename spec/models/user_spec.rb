@@ -19,11 +19,10 @@
 #  updated_at             :datetime         not null
 #
 
-class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
-  belongs_to :company
-  validates :name, presence: true
+require 'rails_helper'
+
+RSpec.describe User, type: :model do
+  let(:user) { build :user }
+
+  it { should validate_presence_of(:name) }
 end

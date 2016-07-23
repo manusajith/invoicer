@@ -8,7 +8,7 @@ class CreateInvoices < ActiveRecord::Migration[5.0]
       t.string :invoice_no
       t.string :reference_no
       t.text :invoice_terms
-      t.boolean :is_paid
+      t.boolean :is_paid, default: false
       t.decimal :tax
 
       t.timestamps

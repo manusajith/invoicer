@@ -20,6 +20,7 @@ class Invoice < ApplicationRecord
   belongs_to :invoice_to, class_name: 'Company'
   belongs_to :invoice_by, class_name: 'Company'
   has_many :invoice_items
+  validates :due_date, presence: true
 
   def sub_total
     invoice_items.collect(&:amount)
@@ -27,5 +28,18 @@ class Invoice < ApplicationRecord
 
   def total
     sub_total + (sub_total * tax / 100)
+  end
+
+  def pay_amount(_stripe_token)
+    Stripe.api_key = invoice_by.stripe_api_key
+    charge = Stripe::Charge.create(
+      amount: total, # amount in cents, again
+      currency: 'usd',
+      source: token,
+      description: 'Example charge'
+    )
+    update_attributes(is_paid: true)
+  rescue Stripe::CardError => e
+    return false
   end
 end

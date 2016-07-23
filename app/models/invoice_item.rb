@@ -13,6 +13,7 @@
 
 class InvoiceItem < ApplicationRecord
   belongs_to :invoice
+  validates :invoice_id, presence: true
 
   def amount
     price * unit
