@@ -34,6 +34,7 @@ gem 'stripe'
 
 group :test do
   gem 'shoulda-matchers', '~> 3.1'
+  gem 'rails-controller-testing'
 end
 
 group :development, :test do

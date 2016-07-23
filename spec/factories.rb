@@ -24,8 +24,8 @@ FactoryGirl.define do
   factory :invoice do
     invoice_to
     invoice_by
-    invoice_date  Date.today - 1
-    due_date      Date.today + 2
+    invoice_date  { Date.today - 1 }
+    due_date      { Date.today + 2 }
     invoice_no    'r3w434'
     reference_no  '122/22'
     invoice_terms 'sdfsdfsdf'

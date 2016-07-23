@@ -26,4 +26,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   belongs_to :company
   validates :name, presence: true
+  accepts_nested_attributes_for :company
 end
