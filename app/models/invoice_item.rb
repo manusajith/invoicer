@@ -12,8 +12,10 @@
 #
 
 class InvoiceItem < ApplicationRecord
-  belongs_to :invoice
-  validates :invoice_id, presence: true
+  belongs_to :invoice, optional: true
+  validates :price, presence: true
+  validates :unit, presence: true
+  validates :description, presence: true
 
   def amount
     price * unit

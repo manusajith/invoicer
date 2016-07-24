@@ -16,6 +16,8 @@ class InvoicesController < ApplicationController
   # GET /invoices/new
   def new
     @invoice = Invoice.new
+    @invoice.invoice_items.build
+    @invoice.build_invoice_to
   end
 
   # GET /invoices/1/edit
@@ -26,12 +28,16 @@ class InvoicesController < ApplicationController
   # POST /invoices.json
   def create
     @invoice = Invoice.new(invoice_params)
+    @invoice.invoice_by = current_user.company
 
     respond_to do |format|
       if @invoice.save
         format.html { redirect_to @invoice, notice: 'Invoice was successfully created.' }
         format.json { render :show, status: :created, location: @invoice }
       else
+        @invoice.invoice_items.build if @invoice.invoice_items.blank?
+        @invoice.build_invoice_to if @invoice.invoice_to.blank?
+
         format.html { render :new }
         format.json { render json: @invoice.errors, status: :unprocessable_entity }
       end
@@ -71,6 +77,6 @@ class InvoicesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def invoice_params
-    params.require(:invoice).permit(:due_date)
+    params.require(:invoice).permit(:due_date, invoice_items_attributes: [:id, :description, :unit, :price], invoice_to_attributes: [:name])
   end
 end

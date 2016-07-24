@@ -39,10 +39,10 @@ ActiveRecord::Schema.define(version: 20_160_723_100_315) do
     t.string   'invoice_no'
     t.string   'reference_no'
     t.text     'invoice_terms'
-    t.boolean  'is_paid'
+    t.boolean  'is_paid', default: false
     t.decimal  'tax'
-    t.datetime 'created_at',    null: false
-    t.datetime 'updated_at',    null: false
+    t.datetime 'created_at',                    null: false
+    t.datetime 'updated_at',                    null: false
   end
 
   create_table 'users', force: :cascade do |t|

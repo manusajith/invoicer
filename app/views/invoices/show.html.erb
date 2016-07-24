@@ -1,11 +1,4 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Due date:</strong>
-  <%= @invoice.due_date %>
-</p>
-
-<!doctype html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -104,9 +97,9 @@
                             </td>
 
                             <td>
-                                Invoice #: 123<br>
-                                Created: January 1, 2015<br>
-                                Due: February 1, 2015
+                                Invoice #: <%= @invoice.invoice_no%><br>
+                                Created: <%=@invoice.created_at.to_date %><br>
+                                Due: <%= @invoice.due_date.to_date %>
                             </td>
                         </tr>
                     </table>
@@ -124,9 +117,9 @@
                             </td>
 
                             <td>
-                                Acme Corp.<br>
-                                John Doe<br>
-                                john@example.com
+                              <%= @invoice.invoice_to.name %>.<br>
+                              <%#= @invoice.invoice_to.user.name %>  <br>
+                              <%#= @invoice.invoice_to.user.email%> 
                             </td>
                         </tr>
                     </table>
@@ -163,41 +156,23 @@
                 </td>
             </tr>
 
-            <tr class="item">
+            <% @invoice.invoice_items.each do | item | %>
+              <tr class="item">
                 <td>
-                    Website design
+                  <%= item.description %>
                 </td>
 
                 <td>
-                    $300.00
-                </td>
-            </tr>
-
-            <tr class="item">
-                <td>
-                    Hosting (3 months)
-                </td>
-
-                <td>
-                    $75.00
+                  $<%= item.price %>
                 </td>
             </tr>
 
-            <tr class="item last">
-                <td>
-                    Domain name (1 year)
-                </td>
-
-                <td>
-                    $10.00
-                </td>
-            </tr>
-
+            <% end %>
             <tr class="total">
                 <td></td>
 
                 <td>
-                   Total: $385.00
+                  Total: $ <%= @invoice.total %>
                 </td>
             </tr>
         </table>

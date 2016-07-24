@@ -22,13 +22,15 @@ class Invoice < ApplicationRecord
   has_many :invoice_items
   validates :due_date, presence: true
 
-  accepts_nested_attributes_for :invoice_items, allow_destroy: true
+  accepts_nested_attributes_for :invoice_items, allow_destroy: true, reject_if: :all_blank
+  accepts_nested_attributes_for :invoice_to, allow_destroy: true, reject_if: :all_blank
 
   def sub_total
-    invoice_items.collect(&:amount)
+    invoice_items.collect(&:amount).sum
   end
 
   def total
+    return sub_total if tax.nil?
     sub_total + (sub_total * tax / 100)
   end
 

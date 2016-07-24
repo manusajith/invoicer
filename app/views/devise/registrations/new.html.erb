@@ -14,7 +14,8 @@
     <%= f.text_field :name %>
   </div>
   <%= f.fields_for :company do |company_fields| %>
-      Company  : <%= company_fields.text_field :name %>
+      <%= company_fields.label :name %><br />
+      <%= company_fields.text_field :name %>
   <% end %>
   <div class="field">
     <%= f.label :password %>
