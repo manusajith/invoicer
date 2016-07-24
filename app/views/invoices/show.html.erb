@@ -92,8 +92,9 @@
                 <td colspan="2">
                     <table>
                         <tr>
-                            <td class="title">
-                                <img src="http://nextstepwebs.com/images/logo.png" style="width:100%; max-width:300px;">
+                          <td class="title">
+                                <%= image_tag @invoice.invoice_by.logo.url %>
+                                <!-- <img src="http://nextstepwebs.com/images/logo.png" style="width:100%; max-width:300px;"> -->
                             </td>
 
                             <td>
@@ -166,8 +167,15 @@
                   $<%= item.price %>
                 </td>
             </tr>
-
-            <% end %>
+          <% end %>
+          <tr class="item last">
+            <td>
+              <%= "Tax" %>
+            </td>
+            <td>
+              <%= @invoice.tax %>%
+            </td>
+          </tr>
             <tr class="total">
                 <td></td>
 

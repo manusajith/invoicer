@@ -31,6 +31,8 @@ gem 'jbuilder', '~> 2.5'
 #
 gem 'devise'
 gem 'stripe'
+gem 'paperclip'
+gem "cocoon"
 
 group :test do
   gem 'shoulda-matchers', '~> 3.1'

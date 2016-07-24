@@ -35,26 +35,13 @@
         <th> Amount </th>
 
       </tr>
-      <%= f.fields_for :invoice_items do |invoice_item_fields| %>
-      <tr>
-        <td>
-          <%= invoice_item_fields.text_field :description %>
-        </td>
-        <td>
-          <%= invoice_item_fields.text_field :unit %>
-        </td>
-        <td>
-          <%= invoice_item_fields.text_field :price %>
-        <td>
-        </td>
-          <td>
-          <%= invoice_item_fields.check_box :_destroy %>
-          <%= invoice_item_fields.label :_destroy, 'remove' %>
-        </td>
-        </tr>
+      <%= f.fields_for :invoice_items do |invoice_item| %>
+         <%= render 'invoice_item_fields', f: invoice_item %> 
       <% end %>
-    </table>
-
+     </table>
+     <div>
+        <%= link_to_add_association 'add item', f, :invoice_items %>
+     </div>
     <%= f.label :tax %>
     <%= f.number_field :tax %> <br/>
   </div>
